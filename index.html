@@ -1,4 +1,63 @@
+
 <!DOCTYPE html>
 <html>
-    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XPTO</title>
+  <link rel="stylesheet" type="text/css" href="estilo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<script type="text/javascript" src="logica.js"></script>
+<body class="w3-light-grey" onload="javascript:popularHoraMinuto()">
+
+<!-- Contenedor -->
+<div class="w3-content" style="max-width:800px;">
+
+<!-- Topo -->
+<div class="w3-center w3-margin w3-teal w3-card-4"><output id="momentoProposto" class="w3-xxxlarge">00:00</output></div>
+
+<!-- Centro -->
+<div class="w3-center">
+	<div class="w3-cell-row">
+		<div class="w3-container w3-cell">
+			<div class="w3-card-2 w3-padding">
+				<fieldset>
+				<legend>Modo de cálculo</legend>
+				<input type="radio" name="calculo" id="modoSaida" checked onchange="alternarModo(this)"><label for="saida"> Última saída</label><br>
+  				<input type="radio" name="calculo" id="modoEntrada" onchange="alternarModo(this)"><label for="entrada"> Primeira entrada</label>
+  				</fieldset>
+  				<fieldset>
+				<legend>Configurações</legend>
+				<input type="checkbox" name="nucleo" id="nucleo" onclick="javascript:mensagemPendente()"> Horário núcleo flexível<br>
+  				<input type="checkbox" name="jornada" id="jornada" onclick="javascript:mensagemPendente()"> Jornada de 6h
+  				</fieldset>
+			</div>
+		</div>
+		<div class="w3-container w3-cell">
+			<div class="w3-card-2 w3-padding">
+				<fieldset>
+				<legend>Marcações</legend>
+				<p>
+				<select id="hora" onchange="javascript:vinteHoras(this.value)"></select> : <select id="minuto"></select><br><br>
+				<button onclick="javascript:incluirMarcacao()">Incluir</button>
+				</p>
+				<p>
+				<select id="marcacoes" size="5"></select><br><br>
+				<button onclick="javascript:excluirMarcacao()">Excluir</button>
+				</p>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Piso -->
+<div class="w3-center w3-margin w3-teal w3-card-4">
+  <h6><a href="https://trello.com/b/duPBJxqn/xpto" target="_blank">Trello - Atividades</a></h6>
+</div>
+
+</div>
+</body>
 </html>
