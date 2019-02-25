@@ -1,0 +1,9 @@
+{
+    "name": "XPTO",
+    "short_name": "XPTO",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "Propõe quando sair ou chegar",
+    "orientation": "portrait-primary"
+  }

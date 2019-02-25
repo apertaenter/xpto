@@ -105,22 +105,25 @@ function incluirMarcacao() {
 }
 
 function excluirMarcacao() {
-    var exp = new Expediente();
-    var modoSaida = document.getElementById("modoSaida");
+    var exp;
+    var modoSaida;
     var selecionado = document.getElementById("marcacoes").selectedIndex;
-    var horaminuto, hora, minuto;
+    var horaMinuto, hora, minuto;
+    // Verificar se tem selecionado. Remove da view, caso tenha
     if (selecionado != -1) {
-        horaminuto = document.getElementById("marcacoes")[selecionado].value;
-        hora = horaminuto.substr(0, 2);
-        minuto = horaminuto.substr(3, 2);
-        exp.excluirMarcacao(hora, minuto);
+        exp = new Expediente();
+        modoSaida = document.getElementById("modoSaida");
+        horaMinuto = document.getElementById("marcacoes")[selecionado].value;
+        hora = horaMinuto.substr(0, 2);
+        minuto = horaMinuto.substr(3, 2);
         document.getElementById("marcacoes").remove(selecionado);
+        // Percorrer a view incluindo no model
+        var horaMinuto = document.getElementById("marcacoes");
+        for (var i = 0; i < horaMinuto.length; i++) {
+            exp.incluirMarcacao(horaMinuto.item(i).value.substr(0, 2), horaMinuto.item(i).value.substr(3, 2));
+        }
+        atualizarMomentoProposto(modoSaida, exp);
     }
-    var horaMinuto = document.getElementById("marcacoes");
-    for (var i = 0; i < horaMinuto.length; i++) {
-        exp.incluirMarcacao(horaMinuto.item(i).value.substr(0, 2), horaMinuto.item(i).value.substr(3, 2));
-    }
-    atualizarMomentoProposto(modoSaida, exp);
 }
 
 function atualizarMomentoProposto(modoSaida, exp) {
@@ -242,4 +245,21 @@ function vinteHoras(hora) {
 
 function mensagemPendente() {
     alert('Implemantação pendente!');
+}
+
+function mudouJornadaDesejada(controle){
+    var jornadaDesejada = document.getElementById("jornadaDesejada");
+    switch(controle.id){
+        case "slider":
+            jornadaDesejada.innerText = slider.value;
+            break;
+        case "menos":
+            jornadaDesejada.innerText = slider.value-1;
+            break;
+        case "mais":
+        jornadaDesejada.innerText = slider.value+1;
+            break;
+        default: alert('algo inesperado');
+    }
+    jornadaDesejada.innerText = slider.value;
 }

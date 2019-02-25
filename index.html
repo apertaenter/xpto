@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XPTO</title>
   <link rel="stylesheet" type="text/css" href="estilo.css">
+  <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <script type="text/javascript" src="logica.js"></script>
@@ -15,10 +16,24 @@
 <!-- Contenedor -->
 <div class="w3-content" style="max-width:800px;">
 
-<!-- Topo -->
+<!-- Proposto -->
 <div class="w3-center w3-margin w3-teal w3-card-4"><output id="momentoProposto" class="w3-xxxlarge">00:00</output></div>
 
-<!-- Centro -->
+<div class="w3-center w3-margin"><output id="jornadaDesejada">000</output></div>
+
+<!-- Jornada -->
+<div class="w3-center w3-margin">
+	<div class="w3-card-2 w3-padding">
+	<fieldset>
+	<legend>Jornada desejada</legend>
+	<button type="button" id="menos" style="width:5%" onclick="mudouJornadaDesejada(this)">-</button>
+	<input type="range" id="slider" min="0" max="300" value="180" onclick="javascript:mudouJornadaDesejada(this)" onmousemove="javascript:mudouJornadaDesejada(this)" onkeydown="javascript:mudouJornadaDesejada(this)" onkeyup="javascript:mudouJornadaDesejada(this)" style="width:80%">
+	<button type="button" id="mais" style="width:5%" onclick="mudouJornadaDesejada(this)">+</button>
+	</fieldset>
+	</div>
+</div>
+
+<!-- Opções & Marcações -->
 <div class="w3-center">
 	<div class="w3-cell-row">
 		<div class="w3-container w3-cell">
@@ -53,7 +68,7 @@
 	</div>
 </div>
 
-<!-- Piso -->
+<!-- Rodapé -->
 <div class="w3-center w3-margin w3-teal w3-card-4">
   <h6><a href="https://trello.com/b/duPBJxqn/xpto" target="_blank">Trello - Atividades</a></h6>
 </div>
