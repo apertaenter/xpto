@@ -81,7 +81,59 @@ function Expediente() {
 /***********************
  * C O N T R O L L E R
  **********************/
-function incluirMarcacao() {
+
+function mudouJornadaDesejada(controle){ // slider
+    var slider = document.getElementById("slider");
+    var jornadaDesejada = document.getElementById("jornadaDesejada");
+    switch(controle.id){
+        case "slider":
+             jornadaDesejada.innerText = slider.value;
+            break;
+        case "menos":
+            // ação no slider
+            if (slider.value != 0)
+                jornadaDesejada.innerText = --slider.value;
+             break;
+        case "mais":
+            // ação no slider
+            if (slider.value != 300)
+                jornadaDesejada.innerText = ++slider.value;
+             break;
+        default: alert('algo inesperado');
+    }
+    // calcular proposta
+}
+
+function alternarModo(radio) { // radio
+
+    /*
+     * Percebi que este evento como todos os outros que mexem no cálculo 
+     * devem trabalhar com a persistência do expediente.
+     * Talvez deva ser criada uma função utilitária que persista 
+     * essa lista 
+     */
+
+    if (radio.id == "modoSaida") {
+        var exp = new Expediente();
+        var marcacoes = document.getElementById("marcacoes");
+        for (var i=0;i<marcacoes.length;i++){
+            exp.incluirMarcacao(marcacoes.ite.value.substr(0, 2), marcacoes.firstChild.value.substr(3, 2));
+        }
+        atualizarMomentoProposto(modoSaida, exp);
+    } else {
+        /*
+        Neste trecho, capturar as marcações caso existam 
+        e chamar a atualização do momento proposto para primeira entrada
+        */
+        alert('inverter cálculo para primeira entrada');
+    }
+}
+
+function configurarCalculo(){ // checkbox
+    null;
+}
+
+function incluirMarcacao() { // button
     var exp = new Expediente();
     var horaSelecionada = document.getElementById("hora").selectedIndex;
     var valorHora = document.getElementById("hora")[horaSelecionada].value;
@@ -92,9 +144,9 @@ function incluirMarcacao() {
     exp.incluirMarcacao(valorHora, valorMinuto);
     while (marcacoes.firstChild) {
         exp.incluirMarcacao(marcacoes.firstChild.value.substr(0, 2), marcacoes.firstChild.value.substr(3, 2));
-        marcacoes.removeChild(marcacoes.firstChild);
+        marcacoes.removeChild(marcacoes.firstChild); // faço isso pra voltar ordenado do model
     }
-    // popular lista
+    // popular lista ordenada
     for (var i = 0; i < exp.marcacoes.length; i++) {
         var item = document.createElement("option");
         item.value = exp.formatarDataHora(exp.obterMarcacao(i));
@@ -104,7 +156,7 @@ function incluirMarcacao() {
     atualizarMomentoProposto(modoSaida, exp);
 }
 
-function excluirMarcacao() {
+function excluirMarcacao() { // button
     var exp;
     var modoSaida;
     var selecionado = document.getElementById("marcacoes").selectedIndex;
@@ -126,7 +178,7 @@ function excluirMarcacao() {
     }
 }
 
-function atualizarMomentoProposto(modoSaida, exp) {
+function atualizarMomentoProposto(modoSaida, exp) { // output
     var momentoProposto = document.getElementById("momentoProposto");
     if (modoSaida.checked)
         momentoProposto.value = exp.formatarDataHora(exp.calcularUltimaSaida());
@@ -134,6 +186,8 @@ function atualizarMomentoProposto(modoSaida, exp) {
         momentoProposto.value = exp.formatarDataHora(exp.calcularPrimeiraEntrada());
     exp = {};
 }
+
+// Utilitários
 
 function popularHoraMinuto() {
     var horaAtual = new Date().getHours();
@@ -180,34 +234,6 @@ function popularHoraMinuto() {
     }
 }
 
-function alternarModo(radio) {
-
-    /*
-     * Percebi que este evento como todos os outros que mexem no cálculo 
-     * devem trabalhar com a persistência do expediente.
-     * Talvez deva ser criada uma função utilitária que persista 
-     * essa lista 
-     */
-
-    if (radio.id == "modoSaida") {
-        /*
-        Neste trecho, capturar as marcações caso existam 
-        e chamar a atualização do momento proposto para última saída
-        */
-        alert('inverter cálculo para última saída');
-    } else {
-        /*
-        Neste trecho, capturar as marcações caso existam 
-        e chamar a atualização do momento proposto para primeira entrada
-        */
-        alert('inverter cálculo para primeira entrada');
-    }
-
-
-}
-
-// Utilitários
-
 function vinteHoras(hora) {
     var item, texto;
     var minuto = document.getElementById("minuto");
@@ -245,21 +271,4 @@ function vinteHoras(hora) {
 
 function mensagemPendente() {
     alert('Implemantação pendente!');
-}
-
-function mudouJornadaDesejada(controle){
-    var jornadaDesejada = document.getElementById("jornadaDesejada");
-    switch(controle.id){
-        case "slider":
-            jornadaDesejada.innerText = slider.value;
-            break;
-        case "menos":
-            jornadaDesejada.innerText = slider.value-1;
-            break;
-        case "mais":
-        jornadaDesejada.innerText = slider.value+1;
-            break;
-        default: alert('algo inesperado');
-    }
-    jornadaDesejada.innerText = slider.value;
 }

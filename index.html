@@ -8,7 +8,6 @@
   <title>XPTO</title>
   <link rel="stylesheet" type="text/css" href="estilo.css">
   <link rel="manifest" href="/manifest.json">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <script type="text/javascript" src="logica.js"></script>
 <body class="w3-light-grey" onload="javascript:popularHoraMinuto()">
@@ -19,7 +18,7 @@
 <!-- Proposto -->
 <div class="w3-center w3-margin w3-teal w3-card-4"><output id="momentoProposto" class="w3-xxxlarge">00:00</output></div>
 
-<div class="w3-center w3-margin"><output id="jornadaDesejada">000</output></div>
+<div class="w3-center w3-margin"><output id="jornadaDesejada">180</output></div>
 
 <!-- Jornada -->
 <div class="w3-center w3-margin">
@@ -45,8 +44,8 @@
   				</fieldset>
   				<fieldset>
 				<legend>Configurações</legend>
-				<input type="checkbox" name="nucleo" id="nucleo" onclick="javascript:mensagemPendente()"> Horário núcleo flexível<br>
-  				<input type="checkbox" name="jornada" id="jornada" onclick="javascript:mensagemPendente()"> Jornada de 6h
+				<input type="checkbox" name="nucleo" id="nucleo" onclick="javascript:mensagemPendente()"> Horário núcleo<br>
+  				<input type="checkbox" name="contrato" id="contrato" onclick="javascript:mensagemPendente()"> Contrato de 6h
   				</fieldset>
 			</div>
 		</div>
